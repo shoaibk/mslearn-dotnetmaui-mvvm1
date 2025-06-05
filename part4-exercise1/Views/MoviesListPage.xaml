@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:MovieCatalog"
              x:Class="MovieCatalog.Views.MoviesListPage"
              x:DataType="vm:MovieListViewModel"
-             Title="Movies"
+             Title="Movies (Temp Change)"
              BindingContext="{x:Static local:App.MainViewModel}">
     <ListView ItemsSource="{Binding Movies}" Margin="10" ItemTapped="ListView_ItemTapped">
         <ListView.ItemTemplate>
