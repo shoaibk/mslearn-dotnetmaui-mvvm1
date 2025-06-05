@@ -4,6 +4,7 @@ public partial class MoviesListPage : ContentPage
 {
 	public MoviesListPage()
 	{
+		//test
 		InitializeComponent();
 	}
 
