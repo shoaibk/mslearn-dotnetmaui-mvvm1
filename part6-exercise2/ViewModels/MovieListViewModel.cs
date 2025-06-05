@@ -16,8 +16,11 @@ public class MovieListViewModel: ObservableObject
 
     public ObservableCollection<MovieViewModel> Movies { get; set; }
 
-    public MovieListViewModel() =>
+    public MovieListViewModel()
+    {
         Movies = [];
+        DeleteMovieCommand = new Command<MovieViewModel>(DeleteMovie);
+    }
 
     public async Task RefreshMovies()
     {
@@ -29,4 +32,6 @@ public class MovieListViewModel: ObservableObject
 
     public void DeleteMovie(MovieViewModel movie) =>
         Movies.Remove(movie);
+    
+    public ICommand DeleteMovieCommand { get; private set; }
 }
