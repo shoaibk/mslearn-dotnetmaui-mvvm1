@@ -3,13 +3,23 @@ using System.Collections.ObjectModel;
 
 namespace MovieCatalog.ViewModels;
 
+
+
 public class MovieListViewModel: ObservableObject
 {
     public ObservableCollection<MovieViewModel> Movies { get; set; }
 
     public MovieListViewModel() =>
         Movies = [];
+    
+    
+    private MovieViewModel _selectedMovie;
 
+    public MovieViewModel SelectedMovie
+    {
+        get => _selectedMovie;
+        set => SetProperty(ref _selectedMovie, value);
+    }
     public async Task RefreshMovies()
     {
         IEnumerable<Models.Movie> moviesData = await Models.MoviesDatabase.GetMovies();
