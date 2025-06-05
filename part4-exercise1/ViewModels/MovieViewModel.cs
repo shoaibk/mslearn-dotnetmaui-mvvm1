@@ -40,4 +40,5 @@ public class MovieViewModel: ObservableObject
         _director = movie.Director;
         _year = new DateOnly(movie.Year, 1, 1);
     }
+    
 }

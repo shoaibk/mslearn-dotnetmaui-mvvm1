@@ -20,4 +20,12 @@ public class MovieListViewModel: ObservableObject
 
     public void DeleteMovie(MovieViewModel movie) =>
         Movies.Remove(movie);
+    
+    private MovieViewModel _selectedMovie;
+
+    public MovieViewModel SelectedMovie
+    {
+        get => _selectedMovie;
+        set => SetProperty(ref _selectedMovie, value);
+    }
 }
