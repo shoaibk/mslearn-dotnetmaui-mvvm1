@@ -4,6 +4,8 @@ namespace MovieCatalog;
 
 public static class MauiProgram
 {
+    
+    //test
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
