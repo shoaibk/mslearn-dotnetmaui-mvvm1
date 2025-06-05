@@ -13,11 +13,16 @@ public class MovieListViewModel: ObservableObject
         get => _selectedMovie;
         set => SetProperty(ref _selectedMovie, value);
     }
+    
+    public ICommand DeleteMovieCommand { get; private set; }
 
     public ObservableCollection<MovieViewModel> Movies { get; set; }
 
-    public MovieListViewModel() =>
+    public MovieListViewModel()
+    {
         Movies = [];
+        DeleteMovieCommand = new Command<MovieViewModel>(DeleteMovie);
+    }
 
     public async Task RefreshMovies()
     {
