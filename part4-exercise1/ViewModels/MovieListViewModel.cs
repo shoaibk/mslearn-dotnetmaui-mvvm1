@@ -1,15 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace MovieCatalog.ViewModels;
 
 public class MovieListViewModel: ObservableObject
 {
     public ObservableCollection<MovieViewModel> Movies { get; set; }
-
-    public MovieListViewModel() =>
+    public ICommand DeleteMovieCommand { get; private set; }
+    public MovieListViewModel()
+    {
         Movies = [];
-
+        DeleteMovieCommand = new Command<MovieViewModel>(DeleteMovie);
+    }
     public async Task RefreshMovies()
     {
         IEnumerable<Models.Movie> moviesData = await Models.MoviesDatabase.GetMovies();
@@ -20,4 +23,14 @@ public class MovieListViewModel: ObservableObject
 
     public void DeleteMovie(MovieViewModel movie) =>
         Movies.Remove(movie);
+    
+    private MovieViewModel _selectedMovie;
+
+    public MovieViewModel SelectedMovie
+    {
+        get => _selectedMovie;
+        set => SetProperty(ref _selectedMovie, value);
+    }
+    
 }
+
