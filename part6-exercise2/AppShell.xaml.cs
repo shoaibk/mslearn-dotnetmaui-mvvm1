@@ -1,4 +1,6 @@
-﻿namespace MovieCatalog;
+﻿using Microsoft.Maui.Controls;
+
+namespace MovieCatalog;
 
 public partial class AppShell : Shell
 {
