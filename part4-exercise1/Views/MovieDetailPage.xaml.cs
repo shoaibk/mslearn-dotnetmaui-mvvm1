@@ -1,10 +1,13 @@
-namespace MovieCatalog.Views;
+using MovieCatalog.ViewModels;
 
-public partial class MovieDetailPage : ContentPage
+namespace MovieCatalog.Views
 {
-	public MovieDetailPage(ViewModels.MovieViewModel movie)
-	{
-		BindingContext = movie;
-		InitializeComponent();
-	}
+    public partial class MovieDetailPage : ContentPage
+    {
+        public MovieDetailPage()
+        {
+            BindingContext = App.MainViewModel.SelectedMovie;
+            InitializeComponent();
+        }
+    }
 }
