@@ -1,22 +1,23 @@
-﻿namespace MovieCatalog;
+﻿// File: MovieCatalog/App.xaml.cs
 
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using MovieCatalog.ViewModels;
+
+namespace MovieCatalog
+{
     public partial class App : Application
     {
-	public static ViewModels.MovieListViewModel? MainViewModel { get; private set; }
+        public static MovieListViewModel MainViewModel { get; private set; }
 
-	public App()
-	{
-		InitializeComponent();
+        public App()
+        {
+            InitializeComponent();
 
-	}
+            // Instantiate the main VM; no RefreshMovies() call
+            MainViewModel = new MovieListViewModel();
 
-	protected override Window CreateWindow(IActivationState? activationState)
-	{
-		var window = new Window(new AppShell());
-
-		MainViewModel = new();
-		MainViewModel.RefreshMovies().ContinueWith((s) => { });
-
-		return window;
-	}
+            MainPage = new NavigationPage(new Views.MoviesListPage());
+        }
+    }
 }
