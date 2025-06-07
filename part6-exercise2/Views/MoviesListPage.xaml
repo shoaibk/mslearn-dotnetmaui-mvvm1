@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:MovieCatalog.ViewModels"
-             xmlns:local="clr-namespace:MovieCatalog"
-             x:Class="MovieCatalog.Views.MoviesListPage"
-             x:DataType="vm:MovieListViewModel"
-             Title="Movies"
-             BindingContext="{x:Static local:App.MainViewModel}">
-    <ListView ItemsSource="{Binding Movies}" SelectedItem="{Binding SelectedMovie, Mode=OneWayToSource}" Margin="10" ItemTapped="ListView_ItemTapped">
+<ContentPage
+    x:Class="MovieCatalog.Views.MoviesListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MovieCatalog.ViewModels"
+    xmlns:local="clr-namespace:MovieCatalog"
+    Title="Movies"
+    x:DataType="vm:MovieListViewModel"
+    BindingContext="{x:Static local:App.MainViewModel}">
+
+    <ListView
+        ItemsSource="{Binding Movies}"
+        SelectedItem="{Binding SelectedMovie, Mode=OneWayToSource}"
+        Margin="10"
+        ItemTapped="ListView_ItemTapped">
+
         <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding Title}" x:DataType="vm:MovieViewModel">
+            <DataTemplate x:DataType="vm:MovieViewModel">
+                <TextCell Text="{Binding Title}">
                     <TextCell.ContextActions>
-                        <MenuItem Text="Delete" IsDestructive="True" Clicked="MenuItem_Clicked" />
+                        <!--
+              Replace the old Clicked="MenuItem_Clicked" with this binding:
+              - Command points to DeleteMovieCommand on App.MainViewModel
+              - CommandParameter passes the current MovieViewModel ("{Binding}")
+            -->
+                        <MenuItem
+                            Text="Delete"
+                            IsDestructive="True"
+                            Command="{Binding DeleteMovieCommand, Source={x:Static local:App.MainViewModel}}"
+                            CommandParameter="{Binding}" />
                     </TextCell.ContextActions>
                 </TextCell>
             </DataTemplate>
         </ListView.ItemTemplate>
+
     </ListView>
 </ContentPage>
