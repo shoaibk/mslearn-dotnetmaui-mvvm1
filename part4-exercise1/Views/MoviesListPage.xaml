@@ -7,7 +7,11 @@
              x:DataType="vm:MovieListViewModel"
              Title="Movies (Temp Change)"
              BindingContext="{x:Static local:App.MainViewModel}">
-    <ListView ItemsSource="{Binding Movies}" Margin="10" ItemTapped="ListView_ItemTapped">
+
+    <ListView ItemsSource="{Binding Movies}"
+              SelectedItem="{Binding SelectedMovie, Mode=OneWayToSource}"
+              Margin="10"
+              ItemTapped="ListView_ItemTapped">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding Title}" x:DataType="vm:MovieViewModel">
@@ -18,4 +22,5 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+
 </ContentPage>
