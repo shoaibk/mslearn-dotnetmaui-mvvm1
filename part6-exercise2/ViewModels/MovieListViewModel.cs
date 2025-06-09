@@ -8,6 +8,8 @@ public class MovieListViewModel: ObservableObject
 {
     private MovieViewModel? _selectedMovie;
 
+    public ICommand DeleteMovieCommand { get; private set; }
+
     public MovieViewModel? SelectedMovie
     {
         get => _selectedMovie;
@@ -18,6 +20,7 @@ public class MovieListViewModel: ObservableObject
 
     public MovieListViewModel() =>
         Movies = [];
+        DeleteMovieCommand = new Command<MovieViewModel>(DeleteMovie);
 
     public async Task RefreshMovies()
     {
