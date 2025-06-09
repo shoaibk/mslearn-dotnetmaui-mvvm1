@@ -4,20 +4,24 @@ using System.Windows.Input;
 
 namespace MovieCatalog.ViewModels;
 
-public class MovieListViewModel: ObservableObject
+public class MovieListViewModel : ObservableObject
 {
-    private MovieViewModel? _selectedMovie;
+    public ObservableCollection<MovieViewModel> Movies { get; set; }
 
-    public MovieViewModel? SelectedMovie
+    private MovieViewModel _selectedMovie;
+    public MovieViewModel SelectedMovie
     {
         get => _selectedMovie;
         set => SetProperty(ref _selectedMovie, value);
     }
 
-    public ObservableCollection<MovieViewModel> Movies { get; set; }
+    public ICommand DeleteMovieCommand { get; private set; }
 
-    public MovieListViewModel() =>
+    public MovieListViewModel()
+    {
         Movies = [];
+        DeleteMovieCommand = new Command<MovieViewModel>(DeleteMovie);
+    }
 
     public async Task RefreshMovies()
     {
